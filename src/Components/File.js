@@ -16,23 +16,41 @@ function File() {
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [showPdfModal, setShowPdfModal] = useState(false);
 
+  // useEffect(() => {
+  //   fetchFiles();
+  // }, []);
+
   useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/getFiles', {
+          headers: {
+            authorization: `${authToken}`,
+          },
+        });
+        const filesData = response.data[0]?.file || [];
+        setFiles(filesData);
+      } catch (error) {
+        console.error('Error fetching files:', error);
+      }
+    };
+  
     fetchFiles();
   }, []);
 
-  const fetchFiles = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/getFiles', {
-        headers: {
-          authorization: `${authToken}`,
-        },
-      });
-      const filesData = response.data[0]?.file || [];
-      setFiles(filesData);
-    } catch (error) {
-      console.error('Error fetching files:', error);
-    }
-  };
+  // const fetchFiles = async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:5000/getFiles', {
+  //       headers: {
+  //         authorization: `${authToken}`,
+  //       },
+  //     });
+  //     const filesData = response.data[0]?.file || [];
+  //     setFiles(filesData);
+  //   } catch (error) {
+  //     console.error('Error fetching files:', error);
+  //   }
+  // };
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
