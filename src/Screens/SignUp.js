@@ -12,7 +12,7 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/signup', {
+      const response = await axios.post('https://922b-3-110-170-171.ngrok-free.app/signup', {
         name,
         email,
         password,
