@@ -32,7 +32,7 @@ function File() {
     const authToken = localStorage.getItem('token');
     const fetchFiles = async () => {
       try {
-        const response = await axios.get('https://61b5-182-70-149-162.ngrok-free.app/getFiles', {
+        const response = await axios.get('/getFiles', {
           headers: {
             authorization: `${authToken}`,
           },
@@ -55,7 +55,7 @@ function File() {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('https://61b5-182-70-149-162.ngrok-free.app/getFiles', {
+      const response = await axios.get('/getFiles', {
         headers: {
           authorization: `${authToken}`,
         },
@@ -73,7 +73,7 @@ function File() {
 
   const deleteFile = async (fileName) => {
     try {
-      await axios.delete(`https://61b5-182-70-149-162.ngrok-free.app/deleteFile/${selectedFile}`, {
+      await axios.delete(`/deleteFile/${selectedFile}`, {
         headers: {
           authorization: `${authToken}`,
         },
@@ -88,7 +88,7 @@ function File() {
   const generateShareableLink = async (fileName) => {
     try {
       const response = await axios.post(
-        'https://61b5-182-70-149-162.ngrok-free.app/generateShareLink',
+        '/generateShareLink',
         { fileName },
         {
           headers: {
@@ -107,7 +107,7 @@ function File() {
   const handleShareFile = async (fileName) => {
     try {
       console.log("trying", senderEmail)
-      await axios.post('https://61b5-182-70-149-162.ngrok-free.app/share', { email, fileName, senderEmail },
+      await axios.post('/share', { email, fileName, senderEmail },
         {
           headers: {
             authorization: `${authToken}`,
@@ -265,7 +265,7 @@ function File() {
 
               {/* <h3 className="text-center">{selectedFile}</h3> */}
 
-              <Document file={`https://922b-3-110-170-171.ngrok-free.app/upload/${selectedFile}`} onLoadSuccess={onDocumentLoadSuccess}>
+              <Document file={`/upload/${selectedFile}`} onLoadSuccess={onDocumentLoadSuccess}>
                 {Array.from(new Array(numPages), (el, index) => (
                   <Page key={index} pageNumber={index + 1} />
                 ))}
