@@ -2,7 +2,6 @@
   "name": "reactapp",
   "version": "0.1.0",
   "private": true,
- "proxy": "https://2a73-182-68-254-150.ngrok-free.app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -18,6 +17,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "proxy": "https://2a73-182-68-254-150.ngrok-free.app",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
