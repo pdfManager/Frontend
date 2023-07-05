@@ -1,11 +1,13 @@
-import React ,{ useState} from 'react'
-import { Link } from 'react-router-dom';
+import React ,{ useState } from 'react'
+import { Link , useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,15 +27,16 @@ function SignUp() {
     } catch (error) {
       console.error('Error signing up:', error); // Handle error response
     }
+    navigate('/');
   };
 
     return (
       <div>
-        <div className = "d-flex justify-content-center">
+        <div className = "d-flex justify-content-center mt-4">
         <h1>Create Your Account</h1>
         </div>
     
-        <form className = "m-5 mr-10" onSubmit={handleSubmit} >
+        <form className = "m-5 mr-10 justify-content-center" onSubmit={handleSubmit} >
           <div className="mb-3">
           <div className="mb-3">
             <label  className="form-label">Name</label>
@@ -46,8 +49,8 @@ function SignUp() {
             <label for="exampleInputPassword1" className="form-label">Password</label>
             <input type="password" className="form-control"  value = {password} onChange={(e) => setPassword(e.target.value)}></input>
           </div>
-          <Link to = "/" onClick={handleSubmit} type = "submit" className="btn btn-primary">Submit</Link>
-          <Link to = "/"  className="btn btn-danger m-4">Already a user</Link>
+          <Link to = "/" onClick={handleSubmit} type = "submit" className="btn btn-primary w-25">Submit</Link>
+          <Link to = "/"  className="btn btn-danger m-4 w-25">Already a user</Link>
         </form>
       </div>
     );

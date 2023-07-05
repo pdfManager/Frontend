@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { AiOutlinePlus } from 'react-icons/ai';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function FileUpload() {
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedFileName, setSelectedFileName] = useState('');
   const authToken = localStorage.getItem('token');
+
+
   const handleFileChange = (e) => {
     console.log("handleFilechange");
     const selectedFile = e.target.files[0];
@@ -16,7 +22,7 @@ function FileUpload() {
     }
     setFile(selectedFile);
     console.log("file:", file);
-
+    setSelectedFileName(selectedFile.name);
   };
 
   const handleUpload = async () => {
@@ -45,34 +51,53 @@ function FileUpload() {
       });
       //  setFiles([...files , response.data.filename]);
       console.log("Data", response.data.filename);
-
+      // console.log("yurFile" , file);
     } catch (error) {
       console.error('Error uploading file:', error);
       // Handle error
     }
+
+    navigate("/files");
     window.location.reload()
   };
   ;
-
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
   return (
     <>
-      <div>
-
-        <h1 className="d-flex justify-content-center">File Upload</h1>
-        <div className="d-flex justify-content-center mt-4">
-          <input variant="danger" className="btn-lg" type="file" accept="application/pdf" onChange={handleFileChange} id="fileInput" />
-          {/* <button type="button" onClick={handleUpload} id="uploadButton">Upload</button> */}
-
-          <div>
-            <Button variant="danger" type="button" onClick={handleUpload} id="uploadButton" className="btn-lg">
+    
+    <Button variant="danger" onClick={handleToggleModal} className="btn-lg  bg-primary fw-bold w-50 ml-4">
+      Upload PDF File
+    </Button>
+  
+      <Modal show={showModal} onHide={handleToggleModal} centered >
+        <div>
+        <Modal.Header closeButton className="d-flex justify-content-center bg-primary">
+          <Modal.Title className = "text-light">Upload Your PDF</Modal.Title>
+        </Modal.Header>
+       </div>
+        <Modal.Body>
+        {selectedFileName && (
+              <div className="text-center">
+                <h3>{selectedFileName}</h3>
+              </div>
+            )}
+          <div className="d-flex justify-content-center mt-4">
+            <label htmlFor="fileInput" className="btn btn-secondary btn-lg m-3">
               <AiOutlinePlus className="mr-2" /> Import PDF
-            </Button>
+              <input type="file" accept="application/pdf" onChange={handleFileChange} id="fileInput" style={{ display: 'none' }} />
+            </label>
+           
+            <div>
+              <Button variant="danger" type="button" onClick={handleUpload} id="uploadButton" className="btn-lg m-3">
+                Upload
+              </Button>
+            </div>
           </div>
-        </div>
-      </div>
-      <div>
-        {/* <File></File> */}
-      </div>
+        </Modal.Body>
+      </Modal>
+
     </>
   );
 }

@@ -32,7 +32,7 @@ function Login() {
 
   return (
     <div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-4">
         <h1>Login</h1>
       </div>
 
@@ -65,10 +65,10 @@ function Login() {
           />
         </div>
         {error && <div className="text-danger">{error}</div>}
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary w-25">
           Login
         </button>
-        <Link to="/signup" className="btn btn-danger m-4">
+        <Link to="/signup" className="btn btn-danger m-4 w-25">
           SignUp
         </Link>
       </form>

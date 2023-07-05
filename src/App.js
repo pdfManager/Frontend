@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import SignUp from './Screens/SignUp';
 import { Routes } from 'react-router-dom';
 import Home from './Screens/Home';
+import File from './Components/File';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/home" element={<Home />} />
+        <Route exact path="/files" element={<File />} />
       </Routes>
     </div>
   </Router>
