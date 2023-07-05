@@ -32,7 +32,7 @@ function File() {
     const authToken = localStorage.getItem('token');
     const fetchFiles = async () => {
       try {
-        const response = await axios.get('/getFiles', {
+        const response = await axios.get('https://2a73-182-68-254-150.ngrok-free.app/getFiles', {
           headers: {
             authorization: `${authToken}`,
           },
