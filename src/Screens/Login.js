@@ -12,7 +12,13 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://121e-122-168-41-54.ngrok-free.app/login', { email, password });
+      const response = await axios.post('https://121e-122-168-41-54.ngrok-free.app/login', { email, password },
+      {
+      headers: {
+        Origin: 'https://main--extraordinary-mousse-a933b9.netlify.app',
+      },
+    }
+      );
       console.log(response.data);
 
       // Store the token securely (e.g., using cookies or local storage)
