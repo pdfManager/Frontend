@@ -35,7 +35,7 @@ function File() {
         const response = await axios.get('https://121e-122-168-41-54.ngrok-free.app/getFiles', {
           headers: {
             authorization: `${authToken}`,
-            Origin: 'https://main--extraordinary-mousse-a933b9.netlify.app',
+            Origin: 'https://main--extraordinary-mousse-a933b9.netlify.app/file',
           },
         });
         const filesData = response.data.files[0]?.file || [];
