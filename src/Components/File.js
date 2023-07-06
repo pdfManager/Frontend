@@ -35,6 +35,7 @@ function File() {
         const response = await axios.get('https://1c8b-182-68-254-150.ngrok-free.app/getFiles', {
           headers: {
             authorization: `${authToken}`,
+            Origin: 'https://main--extraordinary-mousse-a933b9.netlify.app',
           },
         });
         const filesData = response.data.files[0]?.file || [];
@@ -76,6 +77,7 @@ function File() {
       await axios.delete(`/deleteFile/${selectedFile}`, {
         headers: {
           authorization: `${authToken}`,
+          
         },
       });
       setSelectedFile(null);
