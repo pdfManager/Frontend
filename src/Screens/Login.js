@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(' https://77ea-182-68-254-150.ngrok-free.app/login', { email, password });
+      const response = await axios.post('https://1f4b-182-68-254-150.ngrok-free.app/login', { email, password });
       console.log(response.data);
 
       // Store the token securely (e.g., using cookies or local storage)
