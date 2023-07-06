@@ -24,15 +24,12 @@ function File() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [email, setEmail] = useState();
   const [senderEmail, setSenderEmail] = useState('');
-  // useEffect(() => {
-  //   fetchFiles();
-  // }, []);
-  
+
   useEffect(() => {
     const authToken = localStorage.getItem('token');
     const fetchFiles = async () => {
       try {
-        const response = await axios.get('https://e756-27-57-129-126.ngrok-free.app/api/getFiles', {
+        const response = await axios.get('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/getFiles', {
           headers: {
             authorization: `${authToken}`,
           },
@@ -55,7 +52,7 @@ function File() {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('https://e756-27-57-129-126.ngrok-free.app/api/getFiles', {
+      const response = await axios.get('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/getFiles', {
         headers: {
           authorization: `${authToken}`,
         },
@@ -73,7 +70,7 @@ function File() {
 
   const deleteFile = async (fileName) => {
     try {
-      await axios.delete(`https://e756-27-57-129-126.ngrok-free.app/api/deleteFile/${selectedFile}`, {
+      await axios.delete(`http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/deleteFile/${selectedFile}`, {
         headers: {
           authorization: `${authToken}`,
           
@@ -89,7 +86,7 @@ function File() {
   const generateShareableLink = async (fileName) => {
     try {
       const response = await axios.post(
-        'https://e756-27-57-129-126.ngrok-free.app/api/generateShareLink',
+        'http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/generateShareLink',
         { fileName },
         {
           headers: {
@@ -108,7 +105,7 @@ function File() {
   const handleShareFile = async (fileName) => {
     try {
       console.log("trying", senderEmail)
-      await axios.post('https://e756-27-57-129-126.ngrok-free.app/api/share', { email, fileName, senderEmail },
+      await axios.post('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/share', { email, fileName, senderEmail },
         {
           headers: {
             authorization: `${authToken}`,
