@@ -32,7 +32,7 @@ function File() {
     const authToken = localStorage.getItem('token');
     const fetchFiles = async () => {
       try {
-        const response = await axios.get('https://1c8b-182-68-254-150.ngrok-free.app/getFiles', {
+        const response = await axios.get('https://121e-122-168-41-54.ngrok-free.app/getFiles', {
           headers: {
             authorization: `${authToken}`,
             origin: 'https://main--extraordinary-mousse-a933b9.netlify.app',
@@ -56,7 +56,7 @@ function File() {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('/getFiles', {
+      const response = await axios.get('https://121e-122-168-41-54.ngrok-free.app/getFiles', {
         headers: {
           authorization: `${authToken}`,
         },
