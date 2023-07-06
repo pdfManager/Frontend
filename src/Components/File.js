@@ -32,7 +32,7 @@ function File() {
     const authToken = localStorage.getItem('token');
     const fetchFiles = async () => {
       try {
-        const response = await axios.get('https://e756-27-57-129-126.ngrok-free.app/getFiles', {
+        const response = await axios.get('https://e756-27-57-129-126.ngrok-free.app/api/getFiles', {
           headers: {
             authorization: `${authToken}`,
           },
@@ -55,7 +55,7 @@ function File() {
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('https://e756-27-57-129-126.ngrok-free.app/getFiles', {
+      const response = await axios.get('https://e756-27-57-129-126.ngrok-free.app/api/getFiles', {
         headers: {
           authorization: `${authToken}`,
         },
@@ -73,7 +73,7 @@ function File() {
 
   const deleteFile = async (fileName) => {
     try {
-      await axios.delete(`https://e756-27-57-129-126.ngrok-free.app/deleteFile/${selectedFile}`, {
+      await axios.delete(`https://e756-27-57-129-126.ngrok-free.app/api/deleteFile/${selectedFile}`, {
         headers: {
           authorization: `${authToken}`,
           
@@ -89,7 +89,7 @@ function File() {
   const generateShareableLink = async (fileName) => {
     try {
       const response = await axios.post(
-        'https://e756-27-57-129-126.ngrok-free.app/generateShareLink',
+        'https://e756-27-57-129-126.ngrok-free.app/api/generateShareLink',
         { fileName },
         {
           headers: {
@@ -108,7 +108,7 @@ function File() {
   const handleShareFile = async (fileName) => {
     try {
       console.log("trying", senderEmail)
-      await axios.post('https://e756-27-57-129-126.ngrok-free.app/share', { email, fileName, senderEmail },
+      await axios.post('https://e756-27-57-129-126.ngrok-free.app/api/share', { email, fileName, senderEmail },
         {
           headers: {
             authorization: `${authToken}`,
