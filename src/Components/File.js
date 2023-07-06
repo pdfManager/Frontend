@@ -73,7 +73,7 @@ function File() {
 
   const deleteFile = async (fileName) => {
     try {
-      await axios.delete(`/deleteFile/${selectedFile}`, {
+      await axios.delete(`https://121e-122-168-41-54.ngrok-free.app/deleteFile/${selectedFile}`, {
         headers: {
           authorization: `${authToken}`,
           
@@ -89,7 +89,7 @@ function File() {
   const generateShareableLink = async (fileName) => {
     try {
       const response = await axios.post(
-        '/generateShareLink',
+        'https://121e-122-168-41-54.ngrok-free.app/generateShareLink',
         { fileName },
         {
           headers: {
@@ -108,7 +108,7 @@ function File() {
   const handleShareFile = async (fileName) => {
     try {
       console.log("trying", senderEmail)
-      await axios.post('/share', { email, fileName, senderEmail },
+      await axios.post('https://121e-122-168-41-54.ngrok-free.app/share', { email, fileName, senderEmail },
         {
           headers: {
             authorization: `${authToken}`,

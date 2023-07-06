@@ -12,7 +12,7 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/signup', {
+      const response = await axios.post('https://121e-122-168-41-54.ngrok-free.app/signup', {
         name,
         email,
         password,
