@@ -44,7 +44,7 @@ function FileUpload() {
     try {
       console.log("file", file);
       console.log("Auth:", authToken);
-      const response = await axios.post('/upload', formData, {
+      const response = await axios.post('https://8f0a-182-68-254-150.ngrok-free.app/upload', formData, {
         headers: {
           authorization: `${authToken}`,
         },
