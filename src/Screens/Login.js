@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://e756-27-57-129-126.ngrok-free.app/login', { email, password }
+      const response = await axios.post('https://e756-27-57-129-126.ngrok-free.app/api/login', { email, password }
     ,
       );
       console.log(response.data);
