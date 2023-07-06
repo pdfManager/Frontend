@@ -35,7 +35,7 @@ function File() {
         const response = await axios.get('https://121e-122-168-41-54.ngrok-free.app/getFiles', {
           headers: {
             authorization: `${authToken}`,
-            'Access-Control-Allow-Origin' :'*',
+            'origin' :'*',
           },
         });
         const filesData = response.data.files[0]?.file || [];
