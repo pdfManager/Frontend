@@ -24,12 +24,13 @@ function File() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [email, setEmail] = useState();
   const [senderEmail, setSenderEmail] = useState('');
-
+  
+  
   useEffect(() => {
     const authToken = localStorage.getItem('token');
     const fetchFiles = async () => {
       try {
-        const response = await axios.get('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/getFiles', {
+        const response = await axios.get('http://localhost:5000/api/getFiles', {
           headers: {
             authorization: `${authToken}`,
           },
@@ -39,7 +40,7 @@ function File() {
         setFiles(filesData);
         setRecievedFiles(recievedData);
         setSenderEmail(response.data.files[0]?.email)
-        // console.log(recievedData);
+        console.log(response);
         // console.log(RecievedFiles);
       } catch (error) {
         console.error('Error fetching files:', error);
@@ -47,18 +48,22 @@ function File() {
     };
 
     fetchFiles();
-    // console.log(senderEmail);
+    // console.log();
   }, []);
 
   const fetchFiles = async () => {
     try {
-      const response = await axios.get('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/getFiles', {
+      const response = await axios.get('http://localhost:5000/api/getFiles', {
         headers: {
           authorization: `${authToken}`,
         },
       });
-      const filesData = response.data[0]?.file || [];
+      // const filesData = response.data[0]?.file || [];
+      // setFiles(filesData);
+      const filesData = response.data.files[0]?.file || [];
+      const recievedData = response.data.Recievedfiles[0].Recievedfiles || [];
       setFiles(filesData);
+      setRecievedFiles(recievedData);
     } catch (error) {
       console.error('Error fetching files:', error);
     }
@@ -69,8 +74,9 @@ function File() {
   };
 
   const deleteFile = async (fileName) => {
+    console.log(fileName);
     try {
-      await axios.delete(`http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/deleteFile/${selectedFile}`, {
+      await axios.delete(`http://localhost:5000/api/deleteFile/${fileName}`, {
         headers: {
           authorization: `${authToken}`,
           
@@ -86,7 +92,7 @@ function File() {
   const generateShareableLink = async (fileName) => {
     try {
       const response = await axios.post(
-        'http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/generateShareLink',
+        'http://localhost:5000/api/generateShareLink',
         { fileName },
         {
           headers: {
@@ -105,7 +111,7 @@ function File() {
   const handleShareFile = async (fileName) => {
     try {
       console.log("trying", senderEmail)
-      await axios.post('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/share', { email, fileName, senderEmail },
+      await axios.post('http://localhost:5000/api/share', { email, fileName, senderEmail },
         {
           headers: {
             authorization: `${authToken}`,
@@ -178,9 +184,9 @@ function File() {
       </div>
 
 
-      <Row className="justify-content-center">
+      <Row className="justify-content-center m-3 h-100">
         {files && files.map((file, index) => (
-          <Col sm={6} md={4} lg={3} key={index} className="mb-4">
+          <Col sm={6} md={4} lg={3} key={index} className="mb-4 h-100">
             <Card className="h-100">
               <Card.Body className="d-flex flex-column align-items-center">
                 <BsFilePdf size={64} className="mb-3" />
@@ -192,7 +198,8 @@ function File() {
                     handlePrivateShare();
                     setFname(file);
                   }}>Share Private</Button>
-
+                  {/* <Button className="m-1 w-25" variant="danger" onClick={() => deleteFile(file)}>Delete</Button> */}
+                  
                 </div>
               </Card.Body>
             </Card>
@@ -200,16 +207,25 @@ function File() {
         ))}
       </Row>
 
+
+
+
+
+
+
+
+{/* // Recived Files code */}
+
       <div className="navbar navbar-expand-lg navbar-dark bg-secondary">
         <h1 className="navbar-brand  fw-bold ms-auto text-center" style={{ fontSize: '35px', width: '100%' }}>
           Recieved Files
         </h1>
       </div>
 
-      <Row className="justify-content-center">
+      <Row className="justify-content-center m-3">
         {RecievedFiles && RecievedFiles.map((file, index) => (
           <Col sm={6} md={4} lg={3} key={index} className="mb-4">
-            <Card className="h-100">
+            <Card className="w-100 ">
               <Card.Title className=" small bg-primary text-white text-center">
                 <h6 className='mb-0'>Received From:</h6>
                 <h6 style={{ fontWeight: 'bold' }}>{file.senderEmail}</h6>
@@ -220,7 +236,6 @@ function File() {
                 <Card.Title className="mb-3 small  text-center">{file.files}</Card.Title>
                 <div className="mt-auto">
                   <Button variant="primary" className="mb-2 text-center w-100 " onClick={() => handleViewPdf(file.files)}>View</Button>
-                  <Button variant="secondary" className='w-100 mb-2 text-center' onClick={() => generateShareableLink(file.files)}>Share Public</Button>
                   <Button variant="danger" className='w-100 mb-2 text-center' onClick={() => {
                     handlePrivateShare();
                     setFname(file.files);
@@ -258,12 +273,7 @@ function File() {
 
           <div className=" justify-content-center">
             <Modal.Body>
-
-
-
-              {/* <h3 className="text-center">{selectedFile}</h3> */}
-
-              <Document file={`/upload/${selectedFile}`} onLoadSuccess={onDocumentLoadSuccess}>
+              <Document file={`http://localhost:5000/api/upload/${selectedFile}`} onLoadSuccess={onDocumentLoadSuccess}>
                 {Array.from(new Array(numPages), (el, index) => (
                   <Page key={index} pageNumber={index + 1} />
                 ))}

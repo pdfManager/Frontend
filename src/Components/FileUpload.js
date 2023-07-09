@@ -13,6 +13,7 @@ function FileUpload() {
 
 
   const handleFileChange = (e) => {
+    
     console.log("handleFilechange");
     const selectedFile = e.target.files[0];
     // Validate file type
@@ -21,7 +22,7 @@ function FileUpload() {
       return;
     }
     setFile(selectedFile);
-    console.log("file:", file);
+    console.log("file:", selectedFile);
     setSelectedFileName(selectedFile.name);
   };
 
@@ -44,13 +45,13 @@ function FileUpload() {
     try {
       console.log("file", file);
       console.log("Auth:", authToken);
-      const response = await axios.post('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/upload', formData, {
+      const response = await axios.post('http://localhost:5000/api/upload', formData, {
         headers: {
           authorization: `${authToken}`,
         },
       });
       //  setFiles([...files , response.data.filename]);
-      console.log("Data", response.data.filename);
+      console.log("Data", response.data.originalname);
       // console.log("yurFile" , file);
     } catch (error) {
       console.error('Error uploading file:', error);

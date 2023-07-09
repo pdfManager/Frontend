@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/login', { email, password }
+      const response = await axios.post('http://localhost:5000/api/login', { email, password }
     ,
       );
       console.log(response.data);

@@ -12,7 +12,7 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://ec2-13-233-245-15.ap-south-1.compute.amazonaws.com/api/signup', {
+      const response = await axios.post('http://localhost:5000/api/signup', {
         name,
         email,
         password,
